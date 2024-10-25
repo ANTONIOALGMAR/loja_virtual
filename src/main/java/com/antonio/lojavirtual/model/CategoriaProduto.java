@@ -7,50 +7,44 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import jakarta.persistence.Id;
 
 @Entity
-@Table(name = "marca_produto")
-@SequenceGenerator(name = "seq_marca_produto", sequenceName = "seq_marca_produto", allocationSize = 1, initialValue = 1)
-public class MarcaProduto implements Serializable {
+@Table(name="categoria_produto")
+@SequenceGenerator(name="seq_categoria_produto", sequenceName="seq_categoria_produto", allocationSize =1, initialValue=1 )
+public class CategoriaProduto implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+	private static final long serializableUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_marca_produto")
-	private Long Id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_categoria_produto")
+	private long Id;
 	
 	@Column(name="nome_desc", nullable=false)
 	private String nomeDesc;
 
-
-	public Long getId() {
+	public long getId() {
 		return Id;
 	}
 
-
-	public void setId(Long id) {
+	public void setId(long id) {
 		Id = id;
 	}
-
 
 	public String getNomeDesc() {
 		return nomeDesc;
 	}
 
-
 	public void setNomeDesc(String nomeDesc) {
 		this.nomeDesc = nomeDesc;
 	}
-
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(Id);
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -60,11 +54,10 @@ public class MarcaProduto implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MarcaProduto other = (MarcaProduto) obj;
-		return Objects.equals(Id, other.Id);
+		CategoriaProduto other = (CategoriaProduto) obj;
+		return Id == other.Id;
 	}
 	
 	
 	
-
 }
