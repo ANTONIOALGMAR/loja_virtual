@@ -20,17 +20,17 @@ public class CategoriaProduto implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_categoria_produto")
-	private long Id;
+	private long id;
 	
 	@Column(name="nome_desc", nullable=false)
 	private String nomeDesc;
 
 	public long getId() {
-		return Id;
+		return id;
 	}
 
 	public void setId(long id) {
-		Id = id;
+		id = id;
 	}
 
 	public String getNomeDesc() {
@@ -43,7 +43,7 @@ public class CategoriaProduto implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(Id);
+		return Objects.hash(id);
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public class CategoriaProduto implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		CategoriaProduto other = (CategoriaProduto) obj;
-		return Id == other.Id;
+		return id == other.id;
 	}
 	
 	
