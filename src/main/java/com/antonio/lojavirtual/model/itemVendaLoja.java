@@ -3,6 +3,7 @@ package com.antonio.lojavirtual.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ForeignKey;
@@ -36,6 +37,7 @@ public class itemVendaLoja implements Serializable{
 	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "venda_compra_loja_virtual_fk"))
 	private vendaCompraLojaVirtual vendaCompraLojaVirtual;
 	
+	@Column(nullable=false)
 	private Double quantidade;
 
 	public Long getId() {
