@@ -4,10 +4,14 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -34,6 +38,22 @@ public class NotaFiscalVenda implements Serializable{
 	
 	@Column(columnDefinition = "text")
 	private String pdf;
+	
+	@OneToOne
+	@JoinColumn(name = "venda_compra_loja_virtual_id", nullable = false,
+	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "venda_compra_loja_virtual_fk"))
+	private vendaCompraLojaVirtual vendaCompraLojaVirtual;
+	
+	
+	
+
+	public vendaCompraLojaVirtual getVendaCompraLojaVirtual() {
+		return vendaCompraLojaVirtual;
+	}
+
+	public void setVendaCompraLojaVirtual(vendaCompraLojaVirtual vendaCompraLojaVirtual) {
+		this.vendaCompraLojaVirtual = vendaCompraLojaVirtual;
+	}
 
 	public Long getId() {
 		return id;
