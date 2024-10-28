@@ -104,10 +104,7 @@ public abstract class Pessoa implements Serializable{
 			return false;
 		Pessoa other = (Pessoa) obj;
 		return Objects.equals(id, other.id);
-	}
-	
-	
-	
+	}	
 	
 	
 
