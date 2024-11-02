@@ -1,34 +1,4 @@
---
--- PostgreSQL database dump
---
 
--- Dumped from database version 16.2
--- Dumped by pg_dump version 16.2
-
--- Started on 2024-10-29 09:28:31 -03
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- TOC entry 3810 (class 1262 OID 49505)
--- Name: loja_virtual; Type: DATABASE; Schema: -; Owner: postgres
---
-
-CREATE DATABASE loja_virtual WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE_PROVIDER = libc LOCALE = 'C';
-
-
-ALTER DATABASE loja_virtual OWNER TO postgres;
-
-\connect loja_virtual
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -46,7 +16,6 @@ SET row_security = off;
 -- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
 --
 
-CREATE SCHEMA public;
 
 
 ALTER SCHEMA public OWNER TO pg_database_owner;
