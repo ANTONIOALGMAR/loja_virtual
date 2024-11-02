@@ -9,7 +9,7 @@ import com.antonio.lojavirtual.model.Usuario;
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Long>{
 
-	@Query(value = "select u from Usuario where u.login = ?1")
+	@Query(value = "select u from Usuario u where u.login = ?1")
 	Usuario findUserByLogin(String login );
 	
 }
