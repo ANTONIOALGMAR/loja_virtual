@@ -18,6 +18,7 @@ import com.antonio.lojavirtual.model.Acesso;
 import com.antonio.lojavirtual.repository.AcessoRepository;
 import com.antonio.lojavirtual.service.AcessoService;
 
+// @CrossOrigin(origins = "www.https://jdevtreinamentos.com.br")
 @Controller
 @RestController
 public class AcessoController {
@@ -48,6 +49,7 @@ public class AcessoController {
 		
 	}
 	
+	// @Secured({ "ROLE_GERENTE", "ROLE_ADMIN" }) /** COM ESSA ANOTAÇÃO SÓ ESSES PODERÃO EXECUTAR O DELETE **/
 	@ResponseBody 
 	@DeleteMapping("/deleteAcessoPorId/{id}") 
 	public ResponseEntity <?> deleteAcessoPorId(@PathVariable("id") Long id) {  
