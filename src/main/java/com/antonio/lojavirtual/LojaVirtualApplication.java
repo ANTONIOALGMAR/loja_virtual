@@ -20,6 +20,8 @@ public class LojaVirtualApplication {
 		System.out.println(new BCryptPasswordEncoder().encode("123"));//
 		
 		SpringApplication.run(LojaVirtualApplication.class, args);
+		
+		
 	}
 
 }
