@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
@@ -38,6 +39,8 @@ public class JWTTokenAutenticacaoService {
     /* Gera o token e retorna na resposta para o cliente com JWT */
     public void addAuthentication(HttpServletResponse response, String username) throws IOException {
         
+    	
+    	
         /* Montagem do Token */
         String JWT = Jwts.builder()
                 .setSubject(username) 
@@ -46,6 +49,9 @@ public class JWTTokenAutenticacaoService {
         
         String token = TOKEN_PREFIX + " " + JWT;
         
+        System.out.println("Token JWT gerado: " + token);
+
+        
         /* Adiciona o token no cabeçalho da resposta */
         response.addHeader(HEADER_STRING, token);
         
@@ -53,7 +59,9 @@ public class JWTTokenAutenticacaoService {
         
         /* Exibe o token no corpo da resposta para verificação no Postman */
         response.getWriter().write("{\"Authorization\": \"" + token + "\"}");
+        response.flushBuffer();  // Garante o envio imediato da resposta
     }
+
     
     
     /* Retorna o usuário autenticado com o token, ou null se inválido */
@@ -66,9 +74,11 @@ public class JWTTokenAutenticacaoService {
 
         
         try {
-            if (token != null && token.startsWith(TOKEN_PREFIX)) {
+            if (token != null && token.startsWith(TOKEN_PREFIX + " ")) {
                 
-                String tokenLimpo = token.replace(TOKEN_PREFIX, "").trim();
+                String tokenLimpo = token.replace(TOKEN_PREFIX + " ", "").trim();
+                
+                System.out.println("TokenLimpo: " + tokenLimpo); // ver o token antes da validacao
                 
                 /* Valida o token e obtem o usuário */
                 String user = Jwts.parser()
