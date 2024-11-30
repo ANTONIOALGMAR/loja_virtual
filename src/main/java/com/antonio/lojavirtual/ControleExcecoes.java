@@ -22,6 +22,18 @@ import com.antonio.lojavirtual.model.dto.ObjetoErroDTO;
 @ControllerAdvice
 public class ControleExcecoes extends ResponseEntityExceptionHandler{
 	
+	@ExceptionHandler(ExceptionMentoriaJava.class)
+	public ResponseEntity<Object> handleExceptionCustom (ExceptionMentoriaJava ex){
+		
+		ObjetoErroDTO objetoErroDTO = new ObjetoErroDTO();
+		
+		objetoErroDTO.setError(ex.getMessage());
+		objetoErroDTO.setCode(HttpStatus.OK.toString());
+		
+		return new ResponseEntity<Object>(objetoErroDTO, HttpStatus.OK);
+	}
+	
+	
 	
 	/* Captura excecoes do projeto*/
 	@ExceptionHandler({Exception.class, RuntimeException.class, Throwable.class})
@@ -67,14 +79,10 @@ ObjetoErroDTO objetoErroDTO = new ObjetoErroDTO();
 		
 		if(ex instanceof DataIntegrityViolationException) {
 			msg = "Erro de integridade no banco: " + ((DataIntegrityViolationException) ex).getCause().getCause().getMessage();
-		}else {
-			msg = ex.getMessage();
-		}
+		}else 
 		if(ex instanceof ConstraintViolationException) {
 			msg = "Erro de chave estrangeira: " + ((ConstraintViolationException) ex).getCause().getCause().getMessage();
-		}else {
-			msg = ex.getMessage();
-		}
+		}else 
 		if(ex instanceof SQLException) {
 			msg = "Erro de SqL do banco: "  + ((SQLException) ex).getCause().getCause().getMessage();
 		}else {

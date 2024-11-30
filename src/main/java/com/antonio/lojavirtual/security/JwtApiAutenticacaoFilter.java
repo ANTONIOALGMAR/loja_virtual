@@ -43,6 +43,7 @@ public class JwtApiAutenticacaoFilter extends GenericFilterBean {
             chain.doFilter(request, response);
             
         } catch (Exception e) {
+        	e.printStackTrace();
         	 // Log de erro
             System.out.println("Erro de autenticação no filtro: " + e.getMessage());
             httpResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
