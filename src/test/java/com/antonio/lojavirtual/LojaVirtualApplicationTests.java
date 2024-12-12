@@ -2,12 +2,12 @@ package com.antonio.lojavirtual;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -45,7 +45,7 @@ public class LojaVirtualApplicationTests {
 
 		Acesso acesso = new Acesso();
 
-		acesso.setDescricao("ROLE_COMPRADOR");
+		acesso.setDescricao("ROLE_COMPRADOR" + Calendar.getInstance().getTimeInMillis());
 
 		ObjectMapper objectMapper = new ObjectMapper();
 
@@ -191,11 +191,16 @@ public class LojaVirtualApplicationTests {
 
 	
 	@Test
-	public void testeCadastraAcesso() {
+	public void testeCadastraAcesso() throws ExceptionMentoriaJava {
+		
+		
+		String descAcesso = "ROLE_ADMIN" + Calendar.getInstance().getTimeInMillis();
 
 		/** EXECUTA O METODO DE SALVAR ACESSO **/
 		Acesso acesso = new Acesso();
-		acesso.setDescricao("ROLE_ADMIN");
+		
+		
+		acesso.setDescricao(descAcesso);
 
 		assertEquals(true, acesso.getId() == null);
 
@@ -205,7 +210,7 @@ public class LojaVirtualApplicationTests {
 		assertEquals(true, acesso.getId() > 0);
 
 		/** VALIDAR DADOS SALVO DE FORMA CORRETA **/
-		assertEquals("ROLE_ADMIN", acesso.getDescricao());
+		assertEquals(descAcesso, acesso.getDescricao());
 
 		/** TESTE DE CARREGAMENTO **/
 		Acesso acesso2 = acessoRepository.findById(acesso.getId()).get();
