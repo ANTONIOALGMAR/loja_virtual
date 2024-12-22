@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Profile;
 
 import com.antonio.lojavirtual.controller.PessoaController;
+import com.antonio.lojavirtual.enums.TipoEndereco;
+import com.antonio.lojavirtual.model.Endereco;
 import com.antonio.lojavirtual.model.PessoaJuridica;
 
 import junit.framework.TestCase;
@@ -34,19 +36,43 @@ public class TestePessoaUsuario extends TestCase{
 		pessoaJuridica.setNomeFantasia("carvalho informatica");
 		pessoaJuridica.setRazaoSocial("antoniocarvalho");
 		
-		pessoaController.salvarPj(pessoaJuridica);
+		Endereco endereco1 = new Endereco();
+		endereco1.setBairro("Jd Dias");
+		endereco1.setCep("55555-555");
+		endereco1.setComplemento("casa cinza");
+		endereco1.setEmpresa(pessoaJuridica);
+		endereco1.setNumero("333");
+		endereco1.setPessoa(pessoaJuridica);
+		endereco1.setRuaLogradouro("av sao joao sexto");
+		endereco1.setTipoEndereco(TipoEndereco.COBRANCA);
+		endereco1.setUf("sp");
+		endereco1.setCidade("sao paulo");
 		
-		/*
-		PessoaFisica pessoaFisica = new PessoaFisica();
+		Endereco endereco2 = new Endereco();
+		endereco2.setBairro("Jd Maraca");
+		endereco2.setCep("66666-555");
+		endereco2.setComplemento("casa 2");
+		endereco2.setEmpresa(pessoaJuridica);
+		endereco2.setNumero("334");
+		endereco2.setPessoa(pessoaJuridica);
+		endereco2.setRuaLogradouro("av pio XII");
+		endereco2.setTipoEndereco(TipoEndereco.ENTREGA);
+		endereco2.setUf("sp");
+		endereco2.setCidade("sao paulo");
 		
-		pessoaFisica.setCpf("0597975788");
-		pessoaFisica.setNome("Antonio Torres");
-		pessoaFisica.setEmail("antonioalgmar@gmail.com");
-		pessoaFisica.setTelefone("46693007");
+		pessoaJuridica.getEnderecos().add(endereco2);
+		pessoaJuridica.getEnderecos().add(endereco1);
 		
+		pessoaJuridica = pessoaController.salvarPj(pessoaJuridica).getBody();
 		
-		pessoaFisica.setEmpresa(pessoaFisica);*/
+		assertEquals(true, pessoaJuridica.getId() > 0);
 		
+		for (Endereco endereco : pessoaJuridica.getEnderecos()) {
+			
+			assertEquals(true, endereco.getId() > 0);
+		}
+		
+		assertEquals(2, pessoaJuridica.getEnderecos().size());
 		
 	}
 

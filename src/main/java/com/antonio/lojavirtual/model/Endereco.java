@@ -18,6 +18,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.antonio.lojavirtual.enums.TipoEndereco;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="endereco")
@@ -31,7 +32,7 @@ public class Endereco implements Serializable {
 	private Long id;
 	
 	@Column(nullable=false)
-	private String ruaLoradouro;
+	private String ruaLogradouro;
 	
 	@Column(nullable=false)
 	private String cep;
@@ -50,6 +51,7 @@ public class Endereco implements Serializable {
 	@Column(nullable=false)
 	private String cidade;
 	
+	@JsonIgnore
 	@ManyToOne(targetEntity = Pessoa.class)
 	@JoinColumn(name = "pessoa_id", nullable = false, foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "pessoa_fk"))
 	private Pessoa pessoa ;
@@ -58,6 +60,7 @@ public class Endereco implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private TipoEndereco tipoEndereco;
 	
+	@JsonIgnore
 	@ManyToOne(targetEntity = Pessoa.class )
 	@JoinColumn(name = "empresa_id", nullable = false, 
 	foreignKey = @ForeignKey(value = ConstraintMode.CONSTRAINT, name = "empresa_id_fk"))
@@ -96,12 +99,12 @@ public class Endereco implements Serializable {
 		this.id = id;
 	}
 
-	public String getRuaLoradouro() {
-		return ruaLoradouro;
+	public String getRuaLogradouro() {
+		return ruaLogradouro;
 	}
 
-	public void setRuaLoradouro(String ruaLoradouro) {
-		this.ruaLoradouro = ruaLoradouro;
+	public void setRuaLogradouro(String ruaLogradouro) {
+		this.ruaLogradouro = ruaLogradouro;
 	}
 
 	public String getCep() {
